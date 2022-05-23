@@ -1,0 +1,33 @@
+https://practice.geeksforgeeks.org/problems/permutations-of-a-given-string2041/1#
+
+class Solution {
+    public List<String> find_permutation(String S) {
+        // Code here
+        List<String> list = new ArrayList<>();
+        int n = S.length();
+        int f = factorial(n);
+        
+        for(int i=0;i<f;i++){
+            StringBuilder sb = new StringBuilder(S);
+            StringBuilder res = new StringBuilder();
+            int temp = i;
+            for(int div = S.length();div>=1;div--){
+                int q = temp/div;
+                int r = temp%div;
+                res.append(sb.charAt(r));
+                sb.deleteCharAt(r);
+                temp= q;
+            }
+            if(!list.contains(res.toString())){
+            list.add(res.toString());}
+        }
+        Collections.sort(list);
+        return list;
+    }
+    public int factorial(int n){
+        if(n==1){
+            return 1;
+        }
+        
+        return n*factorial(n-1);
+    }
