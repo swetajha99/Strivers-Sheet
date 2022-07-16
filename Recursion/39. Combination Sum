@@ -1,0 +1,24 @@
+class Solution {
+    public void findCombinations(int indx, List<List<Integer>> newList, int[] arr, int target, List<Integer> list){
+        if(indx==arr.length){
+            if(target==0){
+                newList.add(new ArrayList<>(list));
+            }
+            return;
+        }
+        
+        if(arr[indx]<=target){
+            list.add(arr[indx]);
+            findCombinations(indx,newList,arr,target-arr[indx],list);
+            list.remove(list.size()-1);
+        }
+        
+        findCombinations(indx+1,newList,arr,target,list);
+    }
+    
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> list = new ArrayList<>();
+        findCombinations(0,list,candidates,target,new ArrayList<>());
+        return list;
+    }
+}
